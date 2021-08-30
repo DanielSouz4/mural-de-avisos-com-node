@@ -11,5 +11,3 @@ app.use('/api', apiRoute)
 app.listen(PORT, () => {
   console.log('Server running on port', PORT)
 })
-
-// fazendo front que se conecta com back
