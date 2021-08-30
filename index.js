@@ -1,26 +1,23 @@
 const PORT = 3000
 const express = require('express')
-const posts = require('./model/posts')
+const apiRoute = require('./routes/api')
+const path = require('path')
 
 const app = express()
 
-// app.use('/', express.json()) ou app.use(express.json())****
-
-app.get('/all', (req, res) => {
-  res.json(JSON.stringify(posts.getAll()))
-})
-
-app.post('/new', express.json(), (req, res) => {
-  let title = req.body.title
-  let description = req.body.description
-
-  posts.newPost(title, description)
-
-  res.send('Post adicionado')
-})
+app.use('/', express.static(path.join(__dirname, 'public')))
+// se na pasta "public" tiver uma "all" ele retornará ela e não passará pra proxima require(que é uma require get "all")
+//resolver => criar rota garantir que não tem nada que bata com a rota all
+// 1) colar todas requires nessa rota
+app.use('/api', apiRoute)
 
 app.listen(PORT, () => {
   console.log('Server running on port', PORT)
 })
 
-// separando do index.js tudo que lida com posts
+// separando o projeto em rotas
+// antes criar pasta publica (p/ enviar arq estáticos)
+//
+
+// para garantir que uma chamada a api não busque por uma pasta api, devemos inverter a chamada das rotas
+// (app.use("/api", apsia) essa linha deve ser chamada primeiro)
