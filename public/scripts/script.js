@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function updatePosts() {
-  fetch('http://localhost:3000/api/all')
+  fetch('http://192.168.0.107:3000/api/all')
     .then(res => {
       return res.json()
     })
@@ -41,7 +41,7 @@ function newPost() {
     body: JSON.stringify(post)
   }
 
-  fetch('http://localhost:3000/api/new', options).then(res => {
+  fetch('http://192.168.0.107:3000/api/new', options).then(res => {
     console.log(res)
     updatePosts()
     document.getElementById('title').value = ''
